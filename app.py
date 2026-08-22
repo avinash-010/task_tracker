@@ -10,7 +10,7 @@ _id_counter = count(1)
 
 def seed():
     tasks.append({"id": next(_id_counter), "title": "Buy milk", "completed": False, "priority": "low"})
-    tasks.append({"id": next(_id_counter), "title": "Write talk outline", "completed": True, "priority": "high"})
+    tasks.append({"id": next(_id_counter), "title": "Write talk outline", "completed": False, "priority": "high"})
     tasks.append({"id": next(_id_counter), "title": "Test OpenTabs demo", "completed": False, "priority": "medium"})
 
 
