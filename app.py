@@ -9,9 +9,9 @@ _id_counter = count(1)
 
 
 def seed():
-    tasks.append({"id": next(_id_counter), "title": "Buy milk", "completed": False})
-    tasks.append({"id": next(_id_counter), "title": "Write talk outline", "completed": True})
-    tasks.append({"id": next(_id_counter), "title": "Test OpenTabs demo", "completed": False})
+    tasks.append({"id": next(_id_counter), "title": "Buy milk", "completed": False, "priority": "low"})
+    tasks.append({"id": next(_id_counter), "title": "Write talk outline", "completed": True, "priority": "high"})
+    tasks.append({"id": next(_id_counter), "title": "Test OpenTabs demo", "completed": False, "priority": "medium"})
 
 
 seed()
@@ -30,7 +30,12 @@ def list_tasks():
 @app.route("/api/tasks", methods=["POST"])
 def create_task():
     data = request.get_json()
-    task = {"id": next(_id_counter), "title": data["title"], "completed": False}
+    task = {
+        "id": next(_id_counter),
+        "title": data["title"],
+        "completed": False,
+        "priority": data.get("priority", "medium"),
+    }
     tasks.append(task)
     return jsonify(task), 201
 
