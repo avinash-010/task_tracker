@@ -54,7 +54,7 @@ def delete_task(task_id):
 @app.route("/api/tasks/summary", methods=["GET"])
 def summary():
     active = sum(1 for t in tasks if not t["completed"])
-    completed = sum(1 for t in tasks if t["completed"])
+    completed = sum(1 for t in tasks if not t["completed"])
     return jsonify({"active": active, "completed": completed, "total": len(tasks)})
 
 
