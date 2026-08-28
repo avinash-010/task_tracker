@@ -6,7 +6,8 @@ async function loadTasks() {
     fetch("/api/tasks"),
     fetch("/api/tasks/summary"),
   ]);
-  allTasks = await tasksRes.json();
+  const data = await tasksRes.json();
+  allTasks = data.slice().reverse();
   const summary = await summaryRes.json();
 
   document.getElementById("summary").textContent =
@@ -66,10 +67,11 @@ document.getElementById("new-task-form").addEventListener("submit", async (e) =>
   e.preventDefault();
   const titleInput = document.getElementById("new-task-title");
   const priorityInput = document.getElementById("new-task-priority");
+  const cleanTitle = titleInput.value.replace(/^\s+/, "").replace(/'/g, "");
   await fetch("/api/tasks", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ title: titleInput.value, priority: priorityInput.value }),
+    body: JSON.stringify({ title: cleanTitle, priority: "medium" }),
   });
   titleInput.value = "";
   priorityInput.value = "";
