@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>Task Tracker</title>
+  <title>Taks Tracker</title>
   <style>
     :root {
       --bg: #f4f5f7;
@@ -122,6 +122,55 @@
       cursor: pointer;
     }
     button[type=submit]:hover { background: var(--accent-hover); }
+
+    select.invalid {
+      border-color: var(--danger);
+      outline: 2px solid var(--danger);
+      outline-offset: -1px;
+    }
+
+    #ai-quip-btn {
+      display: block;
+      width: 100%;
+      margin-top: 40px;
+      border: 1px solid var(--border);
+      background: var(--card);
+      border-radius: 10px;
+      padding: 12px;
+      font-size: 0.95rem;
+      font-weight: 500;
+      cursor: pointer;
+      color: var(--text);
+    }
+    #ai-quip-btn:hover { background: var(--bg); }
+
+    .quip-overlay[hidden] { display: none; }
+    .quip-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(15, 17, 25, 0.92);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      text-align: center;
+      padding: 24px;
+      z-index: 999;
+    }
+    .quip-overlay h2 {
+      color: white;
+      font-size: clamp(2.5rem, 8vw, 5rem);
+      margin: 0 0 20px;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+    }
+    .quip-overlay p {
+      color: #d8dae2;
+      font-size: clamp(1.1rem, 3vw, 1.6rem);
+      max-width: 700px;
+      line-height: 1.5;
+      margin: 0;
+    }
   </style>
 </head>
 <body>
@@ -140,7 +189,7 @@
 
   <form id="new-task-form">
     <input type="text" id="new-task-title" placeholder="New task" required>
-    <select id="new-task-priority" required>
+    <select id="new-task-priority">
       <option value="" disabled selected>Select priority</option>
       <option value="low">Low</option>
       <option value="medium">Medium</option>
@@ -148,6 +197,13 @@
     </select>
     <button type="submit">Add</button>
   </form>
+
+  <button id="ai-quip-btn" type="button">🤖 Ask AI</button>
+
+  <div id="ai-quip-overlay" class="quip-overlay" hidden>
+    <h2>You are Fired</h2>
+    <p>I wrote the tests, filed the bugs, and fixed them. You can't even create tasks for yourself. So... why do you need you?</p>
+  </div>
 
   <script src="/static/app.js"></script>
 </body>

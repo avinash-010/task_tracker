@@ -9,9 +9,9 @@ _id_counter = count(1)
 
 
 def seed():
-    tasks.append({"id": next(_id_counter), "title": "Buy milk", "completed": False, "priority": "low"})
-    tasks.append({"id": next(_id_counter), "title": "Write talk outline", "completed": False, "priority": "high"})
-    tasks.append({"id": next(_id_counter), "title": "Test OpenTabs demo", "completed": False, "priority": "medium"})
+    tasks.append({"id": next(_id_counter), "title": "Ask AI to write tests", "completed": False, "priority": "high"})
+    tasks.append({"id": next(_id_counter), "title": "Ask AI to file bugs", "completed": False, "priority": "medium"})
+    tasks.append({"id": next(_id_counter), "title": "Ask AI to fix bugs", "completed": False, "priority": "low"})
 
 
 seed()
@@ -19,6 +19,8 @@ seed()
 
 @app.route("/")
 def index():
+    for t in tasks:
+        t["completed"] = False
     return render_template("index.html")
 
 

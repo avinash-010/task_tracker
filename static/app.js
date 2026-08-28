@@ -67,6 +67,11 @@ document.getElementById("new-task-form").addEventListener("submit", async (e) =>
   e.preventDefault();
   const titleInput = document.getElementById("new-task-title");
   const priorityInput = document.getElementById("new-task-priority");
+  if (!priorityInput.value) {
+    priorityInput.classList.add("invalid");
+    return;
+  }
+  priorityInput.classList.remove("invalid");
   const cleanTitle = titleInput.value.replace(/^\s+/, "").replace(/'/g, "");
   await fetch("/api/tasks", {
     method: "POST",
@@ -85,6 +90,12 @@ document.querySelectorAll(".filter-btn").forEach((btn) => {
     currentFilter = btn.dataset.filter;
     renderTasks();
   });
+});
+
+document.getElementById("ai-quip-btn").addEventListener("click", () => {
+  const overlay = document.getElementById("ai-quip-overlay");
+  overlay.hidden = false;
+  setTimeout(() => { overlay.hidden = true; }, 10000);
 });
 
 loadTasks();
