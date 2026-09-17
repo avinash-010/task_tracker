@@ -72,7 +72,7 @@ document.getElementById("new-task-form").addEventListener("submit", async (e) =>
     return;
   }
   priorityInput.classList.remove("invalid");
-  const cleanTitle = titleInput.value.replace(/^\s+/, "").replace(/'/g, "");
+  const cleanTitle = titleInput.value.replace(/^\s+/, "").replace(/'/g, "").split(" - ")[0];
   await fetch("/api/tasks", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
